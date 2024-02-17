@@ -1,0 +1,53 @@
+﻿@using BusManagementSystem.Models;
+@using BusManagementSystem.ViewModels;
+@using Newtonsoft.Json
+@model EditTicketViewModel
+<d class="container form-container mt-5">
+    <h1>Edit Ticket</h1>
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Passenger :</label>
+        <div class="col-sm-9">
+            <select asp-for="Ticket.PassengerId" class="form-control">
+                @foreach (var passenger in Model.Passengers)
+                {
+                    <option value="@passenger.PassengerId">@passenger.PassengerId - @passenger.Name</option>
+                }
+            </select>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Trip ID:</label>
+        <div class="col-sm-9">
+            <select asp-for="Ticket.TripId" class="form-control">
+                @foreach (Trip trip in Model.Trips)
+                {
+                    <option value="@trip.TripId">@trip.TripId - @trip.DepartureCityNavigation.Name => @trip.ArrivalCityNavigation.Name</option>
+                }
+            </select>
+        </div>
+    </div>
+    <div class="row mb-3 text-center">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-9">
+            <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    
+ /*   var EditTicketViewModel = @@Html.Raw(@@JsonConvert.SerializeObject(Model,new JsonSerializerSettings
+        {
+        ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+        MaxDepth = 1 // specify the desired level of depth
+        }));
+
+    console.log(EditTicketViewModel)
+    document.querySelector('#ticketinfo p:nth-of-type(1)').textContent = "";
+    document.querySelector('#ticketinfo p:nth-of-type(2)').textContent = "";
+    document.querySelector('#ticketinfo p:nth-of-type(3)').textContent = "";
+    document.querySelector('#ticketinfo p:nth-of-type(4)').textContent = "";
+    document.querySelector('#ticketinfo p:nth-of-type(5)').textContent = "";
+    document.querySelector('#ticketinfo p:nth-of-type(6)').textContent = "";*/
+
+</script>

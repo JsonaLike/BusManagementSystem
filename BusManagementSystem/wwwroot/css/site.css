@@ -1,0 +1,231 @@
+.bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.form-container{
+    max-width:600px!important;
+}
+@media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+    }
+}
+
+#search-for-trip {
+    color: #fff;
+    font-size: clamp(5px, 6vw, 34px);
+}
+.top {
+    max-width: 600px !important;
+}
+.heading-list{
+    margin-top:123px;
+}
+.heading-all-list {
+    font-size:
+    font-weight: bold;
+}
+.fontWhite {
+    color: white;
+    opacity: 1;
+}
+/*the container must be positioned relative:*/
+
+#myInput, #myInput2, #input-submit {
+    border: 1px solid transparent;
+    background-color: #f1f1f1;
+    padding: 10px;
+    font-size: 16px;
+    background-position: 75%;
+    color: #c266d3;
+
+}
+    #input-submit:hover {
+        /*transition-duration: 300ms;
+        background-color: #C5BE1E;*/
+        background-image: linear-gradient(90deg, #C5BE1E 40%, transparent 30%);
+        background-size: 500px;
+        background-repeat: no-repeat;
+        background-position: 0%;
+        -webkit-transition: 500ms ease-in-out;
+        transition: 500ms ease-in-out;
+    }
+#myInput, #myInput2 {
+    background-color: rgb(255, 255, 255, 0.4);
+    width: 100%;
+    color: rgb(255, 255, 255);
+}
+
+    #myInput::placeholder, #myInput2::placeholder, #input-submit::placeholder {
+        color: rgb(255, 255, 255);
+    }
+
+   #input-submit {
+        background-color: rgb(255, 255, 255, 0.4);
+        border-radius: 8px;
+        color: #fff;
+        cursor: pointer;
+        margin-top: 19px;
+    }
+
+.autocomplete {
+    position: relative;
+    display: inline-block;
+    width: clamp(260px, 30vw, 300px);
+}
+
+.autocomplete-items {
+    position: absolute;
+    border: 1px solid #d4d4d4;
+    border-bottom: none;
+    border-top: none;
+    z-index: 99;
+    /*position the autocomplete items to be the same width as the container:*/
+    top: 100%;
+    left: 0;
+    right: 0;
+}
+
+    .autocomplete-items div {
+        padding: 10px;
+        cursor: pointer;
+        background-color: #fff;
+        border-bottom: 1px solid #d4d4d4;
+    }
+
+        /*when hovering an item:*/
+        .autocomplete-items div:hover {
+            background-color: rgb(209, 209, 209);
+        }
+
+/*when navigating through the items using the arrow keys:*/
+.autocomplete-active {
+    background-color: rgb(209, 209, 209) !important;
+    color: #0a0a0a;
+}
+#myInput, #myInput2 {
+    /* styles */
+    border-radius: 8px;
+    height: clamp(5px, 10vw, 46px);
+}
+
+.From {
+    margin-top: clamp(5px, 1.5vw, 24px);
+}
+
+.FromTo {
+    align-self: flex-start;
+    flex-grow: 0;
+    font-size:clamp(16px, 4.5vw, 24px);
+}
+#tripsTable {
+    /*background-color: white;*/
+}
+.displayContainer {
+    overflow-x: auto !important;
+}
+#cardContainerIn {
+    text-align:start!important;
+}
+.cardContainer {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-image: url('../images.png');
+    filter: drop-shadow(0px 4px 22px rgba(0, 0, 0, 0.37)) drop-shadow(-18px -18px 22px rgba(255, 255, 255, 0.37)) drop-shadow(18px 18px 30px rgba(0, 0, 0, 0.3));
+    border-radius: clamp(15px, 5vw, 35px);
+    width: clamp(100px, 80vw, 500px);
+    height: clamp(100px, 80vw, 500px);
+    background-size: cover;
+    margin-bottom: 50px;
+    /*  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;*/
+}
+
+.cdCon {
+}
+
+#my-slider {
+    border-radius: 0px;
+    -webkit-border-radius: 0px;
+}
+
+.cd {
+    margin-top: 57px;
+    margin-bottom: 57px;
+}
+
+.new-brand {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.new-nav .new-nav-item:last-child {
+    margin-right: 0;
+}
+
+.new-link {
+    font-size: 1.1rem;
+    color: white;
+}
+
+.new-link:hover {
+    background-color: #bf0000;
+    transition: all 0.3s ease;
+}
+
+.new-nav:last-child {
+    margin-left: auto;
+}
+
+@media screen and (min-width: 992px) {
+    .new-nav:last-child {
+        margin-left: 0;
+    }
+
+        .new-nav:last-child .new-nav-item {
+            margin-left: 0;
+        }
+
+    .new-nav-item .new-link {
+        font-size: 1.2rem;
+        padding: 0.5rem 1rem;
+        margin: 0px;
+    }
+
+    .navbar {
+        box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
+        padding-top: 0rem;
+        padding-bottom: 0rem;
+    }
+
+    .new-nav-item {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+}
+
+.card {
+    position: relative;
+    width: clamp(100px, 80vw, 500px);
+    height: clamp(100px, 80vw, 500px);
+    filter: drop-shadow(0px 4px 22px rgba(0, 0, 0, 0.37)) drop-shadow(-18px -18px 22px rgba(255, 255, 255, 0.37)) drop-shadow(18px 18px 30px rgba(0, 0, 0, 0.3));
+    border-radius: 35px;
+    background-image: url("ism/image/slides/images.png");
+    background-size: cover;
+    background-position: center;
+}
+
+.card-title {
+    margin-top: clamp(20px, 7vw, 72px);
+    font-size: clamp(20px, 5vw, 28px);
+    color: white;
+    color: white;
+    font-family: Inter;
+}

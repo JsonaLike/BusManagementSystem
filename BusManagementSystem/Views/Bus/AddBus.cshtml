@@ -1,0 +1,96 @@
+﻿@model BusManagementSystem.ViewModels.EditBusViewModel
+@{
+    ViewData["Title"] = "Add Bus";
+}
+
+
+<div class="container top">
+    <h1>Add Bus</h1>
+    <form asp-action="AddBus" method="post">
+        <div class="form-group">
+            <label asp-for="Bus.PlateNumber"></label>
+            <input asp-for="Bus.PlateNumber" class="form-control" />
+            <span asp-validation-for="Bus.PlateNumber" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Bus.Model"></label>
+            <input asp-for="Bus.Model" class="form-control" />
+            <span asp-validation-for="Bus.Model" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Bus.Capacity"></label>
+            <input asp-for="Bus.Capacity" class="form-control" />
+            <span asp-validation-for="Bus.Capacity" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label>Choose Bus Type:</label>
+            <div class="form-check">
+                <input type="radio" asp-for="BusTypeChoice" id="radio-existing" value="False" class="form-check-input" checked>
+                <label class="form-check-label">Existing Bus Type</label>
+            </div>
+            <div class="form-check">
+                <input type="radio" asp-for="BusTypeChoice" id="radio-new" value="True" class="form-check-input">
+                <label class="form-check-label">New Bus Type</label>
+            </div>
+        </div>
+
+        <div class="form-group" id="bus-type-existing" style="display:block">
+            <label asp-for="Bus.BusType">Choose a bus type</label>
+            <select asp-for="Bus.BusType" class="form-control">
+                <option value="">-- Select Bus Type --</option>
+                @foreach (var busType in Model.BusTypeMapping)
+                {
+                   
+                    <option value="@busType.Id">@busType.BusType</option>
+                }
+            </select>
+            <span asp-validation-for="Bus.BusType" class="text-danger"></span>
+        </div>
+
+        <div class="form-group" id="bus-type-new" style="display:none">
+            <label asp-for="BusType">Type a bus type</label>
+            <input asp-for="BusType" class="form-control" />
+            <span asp-validation-for="BusType" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+</div>
+
+
+    <script>
+        $(document).ready(function () {
+       /* $("#radio-existing").change(function () {
+                if ($(this).val() == "False") {
+                $().show();
+                $("#bus-type-existing").prop("disabled", true);
+                } else {
+                    $("#bus-type-new").show();
+                $("#bus-type-existing").prop("disabled", false);
+
+                }
+            });
+        });
+    $("#radio-new").change(function () {
+        if ($(this).val() == "False") {
+            $("#bus-type-existing").show();
+            $("#bus-type-existing").prop("disabled", true);
+        } else {
+            $("#bus-type-new").show();
+            $("#bus-type-existing").prop("disabled", false);
+
+        }
+    });*/
+    $("input[name='BusTypeChoice']").change(function () {
+        if ($(this).val() == "False") {
+                $("#bus-type-existing").show();
+                $("#bus-type-new").hide();
+            } else if ($(this).val() == "True") {
+                $("#bus-type-existing").hide();
+                $("#bus-type-new").show();
+        }
+    });
+            });
+    </script>
+

@@ -1,0 +1,94 @@
+﻿@using BusManagementSystem.Models;
+@model IEnumerable<Ticket>
+<div class="container ">
+    <div class="d-flex flex-row heading-list align-items-center">
+        <div class="text-center mr-3 heading-all-list">List Of Tickets</div>
+        <div><img src="~/icons/Icon-1.svg" alt="My Icon"></div>
+        <button type="button" class="btn btn-primary ml-auto" data-bs-toggle="modal" onclick="displayAddTicketModal()" data-bs-target="#add-trip-modal">Add Ticket</button>
+    </div>
+    @if (!string.IsNullOrEmpty(ViewBag.Message))
+    {
+        <div class="alert alert-primary">
+            @Html.Raw(@ViewBag.Message)
+        </div>
+    }
+</div>
+<div class="container bg-white displayContainer">
+    <table id="TicketsTable" class="display bg-white cell-border" style="width:100%">
+        <thead>
+            <tr>
+                <th>Trip ID</th>
+                <th>Passenger ID</th>
+                <th>Passenger Name</th>
+                <th>Departure</th>
+                <th>Arrival</th>
+                <th>Date</th>
+                <th>Starting Time</th>
+                <th>Bus Plate Number</th>
+                <th>Bus Model</th>
+                <th>Driver Name</th>
+                <th>Capacity</th>
+                <th>Reserved</th>
+                <!--<th>Edit</th>-->
+                <th>Remove</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var ticket in Model)
+            {
+                <tr>
+                    <td>@ticket.TripId</td>
+                    <td>@ticket.PassengerId</td>
+                    <td>@ticket.Passenger.Name</td>
+                    <td>@ticket.Trip.DepartureCityNavigation.Name</td>
+                    <td>@ticket.Trip.ArrivalCityNavigation.Name</td>
+                    <td>@ticket.Trip.Date.Date.ToString("MM/dd/yyyy")</td>
+                    <td>@ticket.Trip.StartingTime</td>
+                    <td>@ticket.Trip.Bus.PlateNumber</td>
+                    <td>@ticket.Trip.Bus.Model</td>
+                    <td>@ticket.Trip.Driver.Name</td>
+                    <td>@ticket.Trip.Capacity</td>
+                    <td>@ticket.Trip.Reserved</td>
+                    <!--<td>
+                        <button type="button" class="btn btn-primary edit-trip" onclick="displayEditTicketModal(@ticket.PassengerId,@ticket.TripId)" data-bs-target="#edit-trip-modal" data-trip-id="@ticket.TripId">
+                            <i class="fas fa-edit"></i> 
+                        </button>
+                    </td>-->
+                     <td>
+                        <button type="button" class="btn btn-danger remove-trip" onclick="displayRemoveTicketModal(@ticket.PassengerId , @ticket.TripId)" data-bs-target="#delete-trip-modal" data-trip-id="@ticket.TripId">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#TicketsTable').dataTable({
+            "paging": true,
+            "pageLength": 10,
+            "ordering": true,
+        });
+    });
+    
+    function displayEditTicketModal(passengerId,ticketId) {
+        var baseUrl = '@Url.Content("~")';
+        window.location.href = `${baseUrl}/Ticket/EditTicket/ticketId=${ticketId}&passengerId=${passengerId}`;
+    }
+    function displayAddTicketModal(){
+        var baseUrl = '@Url.Content("~")';
+        window.location.href = `${baseUrl}/Ticket/AddTicket/`;
+    }
+    function displayRemoveTicketModal(passengerId , tripId) {
+        var baseUrl = '@Url.Content("~")';
+        window.location.href = `${baseUrl}/Ticket/RemoveTicket/?tripId=${tripId}&passengerId=${passengerId}`;
+    }
+</script>
+<!--
+foreach (var City in Model)
+{
+    <p>City.LicenseTypeName</p>
+}
+-->

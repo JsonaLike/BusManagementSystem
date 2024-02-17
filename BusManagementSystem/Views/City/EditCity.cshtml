@@ -1,0 +1,22 @@
+﻿@model BusManagementSystem.Models.City
+
+<div class="container top">
+    <div class="heading-list">Add New City</div>
+
+    @if (ViewBag.Message != null)
+    {
+        <div class="alert alert-primary">
+            @Html.Raw(@ViewBag.Message)
+        </div>
+    }
+
+    <form asp-action="EditCity" method="post">
+        <div class="form-group">
+            <label for="Name" class="control-label"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <input type="hidden" asp-for="Id" />
+        <button type="submit" class="btn btn-primary">Edit City</button>
+    </form>
+</div>

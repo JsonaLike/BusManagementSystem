@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - BusManagementSystem</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <script src="https://kit.fontawesome.com/e33b23dcc4.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js" ></script>
+    <link rel="stylesheet" href="~/BusManagementSystem.styles.css" />
+    <script src="~/js/site.js" ></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
+        <div class="container">
+            <a class="navbar-brand new-brand" href="/">Bus Management System</a>
+            <button class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarNav"
+                    aria-controls="navbarNav"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
+                <ul class="navbar-nav new-nav mr-auto">
+                    <a class="nav-link new-link" href="/">
+                    <li class="nav-item new-nav-item">
+                        Home
+                    </li>
+                    </a>
+                    <a class="nav-link new-link" href="/City">
+                    <li class="nav-item new-nav-item">
+                        Drivers
+                    </li>
+                    </a>
+                    <a class="nav-link new-link" href="/ticket">
+                    <li class="nav-item new-nav-item">
+                        Ticket
+                    </li>
+                    </a>
+                    <a class="nav-link new-link" href="/Trip">
+                    <li class="nav-item new-nav-item">
+                        Trips
+                    </li>
+                    </a>
+                    <a class="nav-link new-link" href="/Passenger">
+                    <li class="nav-item new-nav-item">
+                        Passengers
+                    </li>
+                    </a>
+                    <a class="nav-link new-link" href="/Bus">
+                    <li class="nav-item new-nav-item">
+                        Buses
+                    </li>
+                    </a>
+                    <a class="nav-link new-link" href="/City">
+                    <li class="nav-item new-nav-item">
+                        Cities
+                    </li>
+                    </a>
+                </ul>
+                <!--
+                <ul class="navbar-nav new-nav">
+                  <a class="nav-link" href="#">
+                    <li class="nav-item">
+                      Login
+                    </li>
+                  </a>
+                  <a class="nav-link" href="#">
+                    <li class="nav-item">
+                      Registration
+                    </li>
+                  </a>
+                </ul> -->
+
+                <partial name="_LoginPartial" />
+
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2023 - BusManagementSystem - <a asp-area="" asp-page="/Privacy">Privacy</a>
+        </div>
+    </footer>
+
+  
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,94 @@
+﻿@using BusManagementSystem.ViewModels;
+@using BusManagementSystem.Models;
+@model EditTripViewModel;
+
+<div class="container  top">
+    <h1>Add Trip</h1>
+    <form method="post" asp-action="AddTrip" asp-controller="Trip">
+        <div>
+            <div class="form-group">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <input type="hidden" asp-for="Trip.TripId" />
+                <label for="departure-city">Departure City:</label>
+            <select class="form-control" id="departure-city"  asp-for="Trip.DepartureCity">
+                    @foreach (var city in Model.Cities)
+                    {
+                        <option value="@city.Id">@city.Name</option>
+                    }   
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="arrival-city">Arrival City:</label>
+            <select class="form-control" id="arrival-city"  asp-for="Trip.ArrivalCity">
+                    @foreach (var city in Model.Cities)
+                    {
+                        <option value="@city.Id">@city.Name</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="bus">Bus:</label>
+            <select class="form-control" id="bus"  asp-for="Trip.BusId">
+                    @foreach (var bus in Model.Buses)
+                    {
+                    <option value="@bus.BusId">@bus.Model - @bus.PlateNumber - Bus Size(@bus.Capacity)</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="Driver">Driver:</label>
+                <select class="form-control" id="Driver" asp-for="Trip.DriverId">
+                    @foreach (var Driver in Model.Drivers)
+                    {
+                        <option value="@Driver.DriverId">@Driver.Name</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group" asp-for="Trip.StartingTime">
+        <label for="starting-time">Starting Time:</label>
+        <input type="time" class="form-control" id="starting-time"  value="@Model.Trip.StartingTime.ToString(@"hh\:mm")"
+               asp-for="Trip.StartingTime" />
+            </div>
+<div class="form-group" asp-for="Trip.Date">
+    <label for="date">Date:</label>
+    <input type="date" class="form-control" id="date" value="@Model.Trip.Date.ToString("yyyy-MM-dd")"
+           asp-for="Trip.Date" />
+</div>
+<div class="form-group">
+    <label for="capacity">Capacity:</label>
+    <input type="number" class="form-control" id="capacity"  value="@Model.Trip.Capacity"
+           asp-for="Trip.Capacity" />
+</div>
+<div class="form-group" asp-for="Trip.Price">
+    <label for="price">Price:</label>
+    <input type="number" class="form-control" id="price"  value="@Model.Trip.Price"
+           asp-for="Trip.Price" />
+</div>
+<div class="text-center">
+        <button type="submit" class="btn btn-primary mx-auto align-self-center my-4 px-4">Save</button>
+            </div>
+        </div>
+    </form>
+    
+</div>
+<style>
+    
+</style>
+<script>
+
+
+    $("select#departure-city option[value='" + 1 + "']").attr("selected", true);
+
+
+    $("select#arrival-city option[value='" + 2 + "']").attr("selected", true);
+
+
+    $("select#bus option[value='" + 1 + "']").attr("selected", true);
+
+
+    $("select#City option[value='" + 1 + "']").attr("selected", true);
+    console.log("Departure City ID: " + departureCityId);
+    console.log("Arrival City ID: " + arrivalCityId);
+    console.log("Bus ID: " + busId);
+    console.log("City ID: " + CityId);
+</script>

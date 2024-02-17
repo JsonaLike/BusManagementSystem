@@ -1,0 +1,54 @@
+﻿@using BusManagementSystem.Models;
+@using BusManagementSystem.ViewModels;
+@model EditDriverViewModel
+
+@{
+    ViewBag.Title = "Add Driver";
+}
+
+<div class="container top">
+    <h1>Add Driver</h1>
+
+    <form method="post" asp-action="AddDriver">
+        <div class="form-group">
+            <label for="Name">Name</label>
+            <input type="text" class="form-control" id="Name" placeholder="Driver's name"
+               asp-for="Driver.Name" required>
+        </div>
+
+        <div class="form-group">
+            <label for="Phone">Phone</label>
+            <input type="text" class="form-control" id="Phone" value="" placeholder="Enter Driver's phone number"
+               asp-for="Driver.Phone" required>
+        </div>
+
+        <div class="form-group">
+            <label for="Email">Email</label>
+            <input type="email" class="form-control" id="Email" placeholder="Enter Driver's email address"
+               asp-for="Driver.Email" required>
+        </div>
+
+        <div class="form-group">
+            <label for="BirthDate">Birth Date</label>
+            <input type="date" class="form-control" id="BirthDate" asp-for="Driver.BirthDate" required>
+        </div>
+
+        <div class="form-group">
+            <label for="LicenseType">License Type</label>
+            <select class="form-control" id="LicenseType" asp-for="Driver.LicenseType">
+                @foreach (var licenseType in Model.LicenseTypes)
+                {
+                    <option value="@licenseType.LicenseTypeId">@licenseType.LicenseTypeName</option>
+                }
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="LicenseExpiry">License Expiry</label>
+            <input type="date" class="form-control" id="LicenseExpiry" asp-for="Driver.LicenseExpiry" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    
+    </form>
+</div>

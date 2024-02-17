@@ -1,0 +1,79 @@
+﻿@using BusManagementSystem.Models;
+@model IEnumerable<Driver>
+<div class="container">
+    <div class="d-flex flex-row heading-list align-items-center">
+        <div class="text-center mr-3 heading-all-list">List Of All Drivers</div>
+        <div><img src="~/icons/Icon-1.svg" alt="My Icon"></div>
+        <button type="button" class="btn btn-primary ml-auto" data-bs-toggle="modal" onclick="displayAddDriverModal()" data-bs-target="#add-trip-modal">Add Driver</button>
+
+    </div>
+    @if (!string.IsNullOrEmpty(ViewBag.Message))
+    {
+        <div class="alert alert-primary">
+            @Html.Raw(@ViewBag.Message)
+        </div>
+    }
+</div>
+<div class="container bg-white displayContainer">
+    <table id="DriversTable" class="display bg-white cell-border" style="width:100%">
+        <thead>
+            <tr>
+                <th>Driver ID</th>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Birth Date</th>
+                <th>License Type</th>
+                <th>License Expiry</th>
+                <th>Edit</th>
+                <th>Delete</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var Driver in Model)
+            {
+                <tr>
+                    <td>@Driver.DriverId</td>
+                    <td>@Driver.Name</td>
+                    <td>@Driver.Phone</td>
+                    <td>@Driver.Email</td>
+                    <td>@Driver.BirthDate.ToShortDateString()</td>
+                    <td>@Driver.LicenseTypeNavigation.LicenseTypeName</td>
+                    <td>@Driver.LicenseExpiry.ToString("MM/dd/yyyy")</td>
+                    <td>
+                        <button type="button" class="btn btn-primary edit-trip" onclick="displayEditDriverModal(@Driver.DriverId)" data-bs-target="#edit-trip-modal" data-Driver-id="@Driver.DriverId">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-danger remove-Driver" onclick="RemoveDriverAction(@Driver.DriverId)" data-bs-target="#delete-Driver-modal" data-Driver-id="@Driver.DriverId">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#DriversTable').dataTable({
+            "paging": true,
+            "pageLength": 10,
+            "ordering": true,
+        });
+    });
+    function displayAddDriverModal(){
+        var baseUrl = '@Url.Content("~")';
+        window.location.href = `${baseUrl}/Driver/AddDriver/`;
+    } 
+    function displayEditDriverModal(Driverid) {
+        var baseUrl = '@Url.Content("~")';
+        window.location.href = `${baseUrl}/Driver/EditDriver/?DriverId=${Driverid}`;
+    }
+    function RemoveDriverAction(DriverId) {
+        var baseUrl = '@Url.Content("~")';
+        window.location.href = `${baseUrl}/Driver/RemoveDriver/?DriverId=${DriverId}`;
+    }
+</script>

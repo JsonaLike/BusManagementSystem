@@ -1,0 +1,38 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using BusManagementSystem.Models;
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@inject ReservationSystemContext reservationSystemContext;
+<ul class="navbar-nav">
+@if (SignInManager.IsSignedIn(User))
+    {
+        var user = await UserManager.GetUserAsync(User);
+        @if (await UserManager.IsInRoleAsync(user, "Passenger"))
+        {
+          <li class="nav-item new-nav-item">
+                <a class="nav-link new-link text-dark">Balance @Convert.ToInt32(reservationSystemContext.Passengers.Single(p => p.user_id==user.Id).Balance) <i class="fa-solid fa-wallet"></i> </a>
+          </li>   
+        }
+        <li class="nav-item new-nav-item">
+            <a id="manage" class="nav-link new-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Settings<!--Hello @@UserManager.GetUserName(User)!--></a>
+    </li>
+        <li class="nav-item new-nav-item">
+        <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Index", new { area = "" })">
+                <button id="logout" type="submit" class="nav-link new-link btn btn-link text-dark">Logout</button>
+        </form>
+    </li>
+}
+else
+{
+        <a class="nav-link new-link text-dark" id="register" asp-area="Identity" asp-page="/Account/Register">
+        <li class="nav-item new-nav-item">
+        Register
+    </li>
+    </a> 
+        <a class="nav-link new-link text-dark" id="login" asp-area="Identity" asp-page="/Account/Login">
+        <li class="nav-item new-nav-item">
+       Login
+    </li>
+    </a>
+}
+</ul>

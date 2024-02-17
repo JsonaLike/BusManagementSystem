@@ -1,0 +1,48 @@
+﻿@model EditPassengerViewModel
+
+@{
+    ViewData["Title"] = "Add Passenger";
+}
+
+
+<div class="container top">
+    <h1>Add Passenger</h1>
+    <form asp-action="AddPassenger" asp-controller="Passenger" asp-route-id="@Model.passenger.PassengerId" method="post">
+        <div class="form-group">
+            <label asp-for="passenger.Name"></label>
+            <input asp-for="passenger.Name" class="form-control" />
+            <span asp-validation-for="passenger.Name" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="passenger.Gender"></label>
+            <select asp-for="passenger.Gender" class="form-control">
+                @foreach (var gender in Model.Gender)
+                {
+                    <option value="@gender.GenderId">@gender.Gender</option>
+                }
+            </select>
+            <span asp-validation-for="passenger.Gender" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="passenger.BirthDate"></label>
+            <input asp-for="passenger.BirthDate" class="form-control" />
+            <span asp-validation-for="passenger.BirthDate" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="passenger.Balance"></label>
+            <input asp-for="passenger.Balance" class="form-control" />
+            <span asp-validation-for="passenger.Balance" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="passenger.Phone"></label>
+            <input asp-for="passenger.Phone" class="form-control" />
+            <span asp-validation-for="passenger.Phone" class="text-danger"></span>
+        </div>
+        <input type="hidden" asp-for="passenger.PassengerId" />
+        <input type="hidden" asp-for="passenger.user_id" />
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+
+
+</div>

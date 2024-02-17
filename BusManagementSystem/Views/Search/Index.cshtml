@@ -1,0 +1,140 @@
+﻿@using BusManagementSystem.ViewModels;
+@using Microsoft.EntityFrameworkCore;
+@inject Microsoft.AspNetCore.Identity.UserManager<IdentityUser> _userManager
+@inject BusManagementSystem.Models.ReservationSystemContext _reservationsystemcontext
+@model TripViewModel
+
+<div class="container">
+    <div class="d-flex flex-row heading-list align-items-center">
+        <div class="text-center mr-3 heading-all-list">List Of All Trips</div>
+        <div><img src="~/icons/Icon-1.svg" alt="My Icon"></div>
+        <!--<div class="ml-auto"><img src="~/icons/Icon-2.svg" alt="My Icon"></div>-->
+        <button type="button" class="btn btn-primary ml-auto" data-bs-toggle="modal" onclick="displayAddTripModal()" data-bs-target="#add-trip-modal">Add Trip</button>
+    </div>
+    <div>
+        @if (!string.IsNullOrEmpty(ViewBag.Message))
+        {
+            <div class="alert alert-primary">
+                @Html.Raw(@ViewBag.Message)
+            </div>
+        }
+    </div>
+</div>
+
+
+
+
+<div class="container bg-white displayContainer">
+    <table id="tripsTable" class="display cell-border " cellspacing="0">
+        <thead>
+            <tr>
+                <th>Trip ID</th>
+                <th>Departure</th>
+                <th>Arrival</th>
+                <th>Date</th>
+                <th>Starting Time</th>
+                <th>Bus Plate Number</th>
+                <th>Bus Model</th>
+                <th>Driver Name</th>
+                <th>Capacity</th>
+                <th>Reserved</th>
+                <th>Book Ticket</th>
+                <!--<th>Remove</th>-->
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var trip in Model.Trips)
+            {
+                var user = await _userManager.GetUserAsync(User);
+                var isBooked = false;
+                if (user!=null &&await _userManager.IsInRoleAsync(user, "Passenger"))//check if the user is a passenger 
+                if (_reservationsystemcontext.Passengers.Include(p => p.Tickets).Single(p => p.user_id == user.Id).Tickets.Any(t => t.TripId == trip.TripId))
+                {
+                    isBooked = true;
+                }
+                <tr data-trip-id="@trip.TripId">
+                    <td>@trip.TripId</td>
+                    <td data-city-id="@trip.DepartureCityNavigation.Id">@trip.DepartureCityNavigation.Name</td>
+                    <td data-city-id="@trip.ArrivalCityNavigation.Id">@trip.ArrivalCityNavigation.Name</td>
+                    <td>@trip.Date.Date.ToString("MM/dd/yyyy")</td>
+                    <td>@trip.StartingTime</td>
+                    <td data-bus-id="@trip.Bus.BusId">@trip.Bus.PlateNumber</td>
+                    <td>@trip.Bus.Model</td>
+                    <td data-City-id="@trip.Driver.DriverId">@trip.Driver.Name</td>
+                    <td>@trip.Capacity</td>
+                    <td>@trip.Reserved</td>
+                        @if (user!=null &&await _userManager.IsInRoleAsync(user, "Passenger") && isBooked)
+                    {
+                        <td>
+                            <button type="button" class="btn btn-primary edit-trip" disabled>
+                                <i class="fa-solid fa-ticket-simple"></i>
+                            </button>
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            <button type="button" class="btn btn-primary edit-trip" onclick="redirectToBookTicket(@trip.TripId)" data-bs-target="#edit-trip-modal" data-trip-id="@trip.TripId">
+                                <i class="fa-solid fa-ticket-simple"></i>
+                            </button>
+                        </td>
+                    }
+
+                    <!--<td>
+                        
+                            <button type="button" class="btn btn-danger remove-trip" onclick="displayRemoveTripModal(@@trip.TripId)" data-bs-target="#delete-trip-modal" data-trip-id="@trip.TripId">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        
+                    </td>
+                    -->
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<script type="text/javascript">
+
+
+    $(document).ready(function () {
+        $('#tripsTable').dataTable({
+            "paging": true,
+            "pageLength": 10,
+            "ordering": true,
+        });
+        $('.remove-trip').on('click', function () {
+            var tripId = $(this).data('trip-id');
+            var modal = $('#delete-trip-modal');
+            modal.find('.modal-title').text('Delete Trip #' + tripId);
+            modal.find('form').attr('action', '/Trip/DeleteTrip/' + tripId);
+        });
+
+        $('.edit-trip').on('click', function () {
+            var tripRow = document.querySelector('tr[data-trip-id="123"]');
+        });
+
+
+
+    });
+
+
+    function displayEditTripModal(tripId) {
+        console.log('tripId=' + tripId);
+        var baseUrl = '@Url.Content("~")';
+        window.location.href = `${baseUrl}/Trip/EditTrip/?tripId=${tripId}`;
+    }
+    function displayAddTripModal() {
+        var baseUrl = '@Url.Content("~")';
+        window.location.href = `${baseUrl}/Trip/AddTrip/`;
+    }   
+    function displayRemoveTripModal(tripId) {
+        var baseUrl = '@Url.Content("~")';
+        window.location.href = `${baseUrl}/Trip/RemoveTrip/?tripId=${tripId}`;
+    }
+    function redirectToBookTicket(tripId) {
+    var baseUrl = '@Url.Content("~")';
+        var url = '/Ticket/BookTicket/?tripId=' + tripId;
+        window.location.href = url;
+    }
+</script>
