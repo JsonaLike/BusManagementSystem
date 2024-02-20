@@ -42,7 +42,7 @@ builder.Services.Configure<IdentityOptions>(options =>
 });
 // Add services to the container.
 var app = builder.Build();
-app.UsePathBase("/portfolio/bus-management-system");
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
